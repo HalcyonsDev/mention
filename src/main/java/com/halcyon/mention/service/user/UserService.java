@@ -32,19 +32,19 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public User updateFirstnameByEmail(Long id, String firstname) {
+    public User updateFirstname(String firstname) {
         User user = findByEmail(getAuth().getEmail());
 
-        userRepository.updateFirstnameById(firstname, id);
+        userRepository.updateFirstnameById(firstname, user.getId());
         user.setFirstname(firstname);
 
         return user;
     }
 
-    public User updateLastnameByEmail(Long id, String lastname) {
+    public User updateLastname(String lastname) {
         User user = findByEmail(getAuth().getEmail());
 
-        userRepository.updateLastnameById(lastname, id);
+        userRepository.updateLastnameById(lastname, user.getId());
         user.setLastname(lastname);
 
         return user;

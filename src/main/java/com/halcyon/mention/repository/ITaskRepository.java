@@ -1,7 +1,5 @@
 package com.halcyon.mention.repository;
 
-import com.halcyon.mention.model.Complexity;
-import com.halcyon.mention.model.Status;
 import com.halcyon.mention.model.Task;
 import com.halcyon.mention.model.TaskList;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,12 +26,12 @@ public interface ITaskRepository extends JpaRepository<Task, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE Task task SET task.complexity = ?1 WHERE task.id = ?2")
-    void updateComplexityById(Complexity complexity, Long id);
+    void updateComplexityById(String complexity, Long id);
 
     @Transactional
     @Modifying
     @Query("UPDATE Task task SET task.status = ?1 WHERE task.id = ?2")
-    void updateStatusById(Status status, Long id);
+    void updateStatusById(String status, Long id);
 
     @Transactional
     @Modifying

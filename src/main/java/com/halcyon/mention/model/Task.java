@@ -29,10 +29,10 @@ public class Task {
     private String description;
 
     @Column(name = "complexity")
-    private Complexity complexity;
+    private String complexity;
 
     @Column(name = "status")
-    private Status status;
+    private String status;
 
     @Column(name = "date")
     private Instant date;

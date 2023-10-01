@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewListDto {
-    @Size(min = 1, max = 50, message = "Title must be more than 1 character and less than 50 characters.")
+    @Size(min = 2, max = 50, message = "Title must be more than 1 character and less than 50 characters.")
     private String title;
 }

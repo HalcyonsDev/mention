@@ -4,6 +4,7 @@ import com.halcyon.mention.dto.task.NewTaskDto;
 import com.halcyon.mention.model.*;
 import com.halcyon.mention.repository.ITaskRepository;
 import com.halcyon.mention.service.auth.AuthService;
+import com.halcyon.mention.service.category.CategoryService;
 import com.halcyon.mention.service.list.ListService;
 import com.halcyon.mention.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.List;
 public class TaskService {
     private final ITaskRepository taskRepository;
     private final ListService listService;
+    private final CategoryService categoryService;
     private final UserService userService;
     private final AuthService authService;
 
@@ -59,6 +61,13 @@ public class TaskService {
         return taskRepository.findAllByList(list);
     }
 
+    public Task updateCategoryById(Long taskId, Long categoryId) {
+        Task task = checkUserForAccess(taskId);
+
+        task.setCategory(categoryService.findById(categoryId));
+        return taskRepository.save(task);
+    }
+
     public Task updateTitleById(Long id, String title) {
         Task task = checkUserForAccess(id);
 
@@ -80,8 +89,8 @@ public class TaskService {
     public Task updateComplexity(Long id, Complexity complexity) {
         Task task = checkUserForAccess(id);
 
-        taskRepository.updateComplexityById(complexity, id);
-        task.setComplexity(complexity);
+        taskRepository.updateComplexityById(complexity.getCustomName(), id);
+        task.setComplexity(complexity.getCustomName());
 
         return task;
     }
@@ -89,8 +98,8 @@ public class TaskService {
     public Task updateStatusById(Long id, Status status) {
         Task task = checkUserForAccess(id);
 
-        taskRepository.updateStatusById(status, id);
-        task.setStatus(status);
+        taskRepository.updateStatusById(status.getCustomName(), id);
+        task.setStatus(status.getCustomName());
 
         return task;
     }

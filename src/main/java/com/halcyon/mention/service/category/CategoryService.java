@@ -34,6 +34,8 @@ public class CategoryService {
         Category category = new Category(dto.getTitle());
         category.setList(list);
 
+        list.getCategories().add(category);
+
         return categoryRepository.save(category);
     }
 
