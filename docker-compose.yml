@@ -1,23 +1,21 @@
 version: "1.0"
 
 services:
-  mention-db:
-    container_name: mention-db
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: S9o6u4T0
-      POSTGRES_DB: mention
-    ports:
-      - "5433:5432"
-    volumes:
-      - G:/db/mention-db:/var/lib/data/mention-db
-    networks:
-      - mention-network
   mention-app:
     container_name: mention
     image: mention
     ports:
       - "8080:8080"
+    networks:
+      - mention-network
+  mention-db:
+    container_name: mention-db
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mention
+    ports:
+      - "5433:5432"
     networks:
       - mention-network
 volumes:
